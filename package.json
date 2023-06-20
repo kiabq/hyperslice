@@ -1,9 +1,17 @@
 {
-  "url": "",
+  "name": "short-link",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "nodemon src/server.ts"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "dev-api": "nodemon api/server.ts"
   },
   "dependencies": {
+    "astro": "^2.6.5",
     "koa": "^2.14.2",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
@@ -16,6 +24,5 @@
     "@types/node": "^20.3.1",
     "@types/pg": "^8.10.2",
     "typescript": "^5.1.3"
-  },
-  "license": "MIT"
+  }
 }
