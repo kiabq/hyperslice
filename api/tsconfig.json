@@ -1,0 +1,13 @@
+{
+    "version": "2.0.2",
+    "compilerOptions": {
+      "outDir": "./dist",
+      "lib": ["ES5", "ES6"],
+      "target": "ES6",
+      "module": "CommonJS",
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true
+    },
+    "include": ["server.ts"],
+}
