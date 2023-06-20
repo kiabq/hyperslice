@@ -1,5 +1,8 @@
 {
   "url": "",
+  "scripts": {
+    "dev": "nodemon src/server.ts"
+  },
   "dependencies": {
     "koa": "^2.14.2",
     "koa-json": "^2.0.2",
