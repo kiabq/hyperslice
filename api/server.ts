@@ -1,7 +1,10 @@
 import Koa = require('koa');
 import Router = require('koa-router');
+import BodyParser = require('koa-bodyparser');
 import Logger = require('koa-logger');
+import Cors = require('@koa/cors');
 import { Pool } from 'pg';
+import { request } from 'http';
 
 const app = new Koa();
 const router = new Router();
@@ -15,11 +18,21 @@ const pool = new Pool({
 
 router.get('/', async (ctx) => {
     ctx.body = "Hello, World!";
-    const result = await pool.query('SELECT * FROM people');
+    console.log(ctx);
+    // const result = await pool.query('SELECT * FROM people');
 });
 
-router.post('/');
+router.post('/', async (ctx) => {
+    console.log(ctx)
+    ctx.body = "Returned";
+});
 
-app.use(Logger());
-app.use(router.routes());
-app.listen(3001);
+app
+  .use(Logger())
+  .use(BodyParser())
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .use(Cors({
+    origin: ["localhost:3000", "localhost:3001"]
+  }))
+  .listen(3001)
