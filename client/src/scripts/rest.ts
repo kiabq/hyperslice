@@ -14,18 +14,15 @@ async function post(url: string, data={}) {
 export default (function() {
     const form = document.querySelector("#form") as HTMLFormElement;
     const input = document.querySelector("#link-input") as HTMLInputElement;
-
-    const url = input.value;
-    const beingsWith = new RegExp(/^(http|https):\/\//);
-    const urlPattern = new RegExp(/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
-
+    
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        
-        post("http://localhost:3001", { data: "adada" })
+        const url = encodeURIComponent(input.value);
+        post("http://localhost:3001", { data: url })
         .then((response) => {
-            console.log(response)
-        });
-        // console.log(url);
+            if (response.status == 200) {
+                form.reset();
+            }
+        })
     })
 })();
