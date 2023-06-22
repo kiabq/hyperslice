@@ -1,8 +1,27 @@
 /* Global Attributes */
 
+:root {
+    --foreground: #f8cedd;
+    --background: #D48FA9;
+    --neutral-dark: #424242;
+    --neutral-light: #fff;
+}
+
 * {
     margin: 0;
     padding: 0;
+}
+
+html > * {
+    box-sizing: border-box;
+}
+
+/* add input here and other elements */
+input, button {
+    outline: none;
+    background: none;
+    border-radius: 0;
+    border: none;
 }
 
 html {
@@ -20,11 +39,58 @@ body {
 
 /* Class Selectors */
 
+.brutal {
+    border: 2px solid var(--neutral-dark);
+    box-shadow: 5px 5px var(--neutral-dark);
+    text-shadow: 1px 1px white;
+    transition: all 0.20s;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.brutal:focus, .brutal:hover {
+    box-shadow: 2px 2px var(--neutral-dark);
+    transition: all 0.20s;
+}
+
 .link-hero {
     line-height: 0.75;
     padding-bottom: 1.5rem;
+    position: relative;
 }
 
 .link-hero > span {
     font-size: 0.75rem;
+}
+
+.link-input {
+    color: var(--neutral-dark);
+    width: 350px;
+    height: 1.5rem;
+    padding: 1rem;
+    text-shadow: 1.75px 1.75px var(--foreground);
+}
+
+.link-submit {
+    background-color: var(--foreground);
+    color: var(--neutral-light);
+    height: 3.8rem;
+    margin-left: 0.25rem;
+    text-shadow: 1px 1px var(--neutral-dark);
+}
+
+.link-submit > span {
+    height: 1.5rem;
+    padding: 1rem;
+}
+
+@media (max-width: 450px) {
+    .link-input {
+        width: 200px;
+        height: 1rem;
+    }
+
+    .link-submit {
+        height: 3.2rem;
+    }
 }
