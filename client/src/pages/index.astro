@@ -1,48 +1,16 @@
----
-// I hate this, change import path plox
-import "../../public/style.css";
----
-
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="author" content="https://www.github.com/kiabq" />
-		<meta name="description" content="<INSERT DESCRIPTION HERE FUTURE KB>"/>
 		<title>Astro</title>
-
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<!-- Geologica Font  -->
-		<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">		
-
-		<!-- Scripts -->
-		<script src="../scripts/rest.ts"></script>
+		<script src="../scripts/rest.ts"/>
 	</head>
-
 	<body>
-		<div>
-			<div class="link-hero">
-				<h1>Short-Link</h1>
-				<span>or your creative name here!</span>
-			</div>
-			<form id="form" method="POST">
-				<input 
-					id="link-input" 
-					type="text" 
-					class="temp" 
-					required
-				/>
-				<!-- <input 
-					id="link-alias"
-					type="text" 
-					required
-				/> -->
-				<button type="submit">
-					Submit
-				</button>
-			</form>
-		</div>
+		<form id="form" method="POST">
+			<input id="link-input" type="text"/>
+			<button type="submit">Submit</button>
+		</form>
 	</body>
 </html>
