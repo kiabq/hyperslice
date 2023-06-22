@@ -1,0 +1,30 @@
+/* Global Attributes */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Geologica', sans-serif;
+    text-align: center;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Class Selectors */
+
+.link-hero {
+    line-height: 0.75;
+    padding-bottom: 1.5rem;
+}
+
+.link-hero > span {
+    font-size: 0.75rem;
+}
