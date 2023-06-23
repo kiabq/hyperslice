@@ -3,6 +3,7 @@ import Router = require('koa-router');
 import BodyParser = require('koa-bodyparser');
 import Logger = require('koa-logger');
 import { Pool } from 'pg';
+import { encode } from './utils/generate-alias';
 
 // import https from 'https';
 // import Cors = require('@koa/cors');
@@ -48,11 +49,12 @@ router.post('/', async (ctx) => {
 
       if (!isInTable) {
         // make this better :)
-        await pool.query(`INSERT INTO links (link) values ('${url}')`);
-        console.log("inserting into db: ", url);
+        await pool.query(`INSERT INTO links (link) values ('${url}')`)
+          .then(() => {
+            encode(pool, url);
+          });
       } else {
-        // Throw error here
-        console.error("erroring here");
+        await encode(pool, url);
       }
 
       const body = ctx.request.body;
