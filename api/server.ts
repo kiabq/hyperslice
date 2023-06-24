@@ -3,7 +3,8 @@ import Router = require('koa-router');
 import BodyParser = require('koa-bodyparser');
 import Logger = require('koa-logger');
 import { Pool } from 'pg';
-import { encode } from './utils/generate-alias';
+import { encode, decode } from './utils/generate-alias';
+import { Readable } from 'stream';
 
 // import https from 'https';
 // import Cors = require('@koa/cors');
@@ -18,53 +19,38 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000
 });
 
-router.get('/', async (ctx) => {
-  ctx.body = "Hello, World!";
-  // const result = await pool.query('SELECT * FROM people');
+router.get('/:id', async (ctx) => {
+  const code = (ctx.request.url.split('/'))[1];
+  const link = await decode(pool, code);
+  if (link) {
+    let temp = decodeURIComponent(link);
+    ctx.status = 301;
+    ctx.redirect(temp);
+  } else {
+    ctx.body = "ERROROAROARKOA"
+  }
 });
-
-// TODO
-// - Encode and Decode urls both on frontend and backend
-// - database stuff
-
-/*
-  figure out what this means and implement it:
-  CONSTRAINT FK_link FOREIGN KEY(link_id) REFERENCES link(link_id)
-*/
 
 router.post('/', async (ctx) => {
   const urlPattern = new RegExp(/^(http|https):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
   const url = ctx.request.body['data'];
 
-  // bubby suggests: try one try w/ two catches instead of a nested try...catch
   try {
     if (!urlPattern.test(decodeURIComponent(url))) {
       throw new Error('Invalid URL: ' + url);
     }
-
-    try {
-      // check if url is in the table
-      const result = await pool.query(`SELECT link FROM links WHERE link = '${url}'`);
-      const isInTable = !!(result.rows.length);
-
-      if (!isInTable) {
-        // make this better :)
-        await pool.query(`INSERT INTO links (link) values ('${url}')`)
-          .then(() => {
-            encode(pool, url);
-          });
-      } else {
-        await encode(pool, url);
-      }
-
-      const body = ctx.request.body;
-      ctx.status = 200;
-      ctx.body = { message: 'POST Success', data: body };
-    } catch(e) {
-      // query went wrong, maybe change this catch
-      console.log(e);
+    
+    const result = await pool.query(`SELECT link FROM links WHERE link = '${url}'`);
+    const isInTable = result.rows.length;
+    if (!isInTable) {
+      await pool.query(`INSERT INTO links (link) values ('${url}')`);
     }
-  } catch (error) {
+
+    const body = await encode(pool, url);
+    ctx.response.body = { message: 'POST Success', data: 'localhost:3001/' + body };
+    ctx.status = 200;
+    ctx.body = ctx.response.body;
+  } catch(error) {
     ctx.status = 413;
     ctx.body = { error: 'POST Failed', reason: error.message };
   }
