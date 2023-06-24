@@ -11,42 +11,64 @@ import "../../public/style.css";
 		<meta name="author" content="https://www.github.com/kiabq" />
 		<meta name="description" content="<INSERT DESCRIPTION HERE FUTURE KB>"/>
 		<title>Astro</title>
-
+		
+		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<!-- Geologica Font  -->
+		<!-- Material Icons -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+		<!-- Geologica Font -->
 		<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">		
-
 		<!-- Scripts -->
 		<script src="../scripts/rest.ts"></script>
+		<script src="../scripts/controls.ts"></script>
 	</head>
 
 	<body>
-		<div>
+		<div class="temp">
 			<div class="link-hero">
 				<h1>Short-Link</h1>
 				<p>or your creative name here!</p>
 			</div>
-			<form id="form" method="POST">
-				<!-- Change Font Here -->
-				<input 
-					id="link-input"
-					class="link-input brutal"
-					placeholder="enter link"
-					type="text" 
-					required
-				/> 
-				<!-- <input 
-					id="link-alias"
-					type="text" 
-					required
-				/> -->
-				<button type="submit" class="link-submit brutal">
+
+			<form id="form-long" method="POST">
+				<div class="link-input-wrapper">
+					<input 
+						id="link-input"
+						class="brutal brutal-animate link-input"
+						placeholder="your link goes here!"
+						type="text" 
+						required
+						maxlength="2048"
+					/>
+					<p class="link-error"></p>
+				</div>
+				<button type="submit" class="link-submit brutal brutal-animate">
 					<span>
 						submit
 					</span>
 				</button>
+				
 			</form>
+
+			<div id="form-short">
+				<div>
+					<h6 class="link-final-header">shortened link:</h6>
+					<input 					
+						id="link-short"
+						class="brutal link-input link-final"
+						type="text"
+						autocomplete="off" 
+						disabled
+					/>
+				</div>
+
+				<button class="link-copy" onclick="this.blur();" tabindex="0">
+					<span class="material-symbols-sharp">
+						content_copy
+					</span>
+				</button>
+			</div>
 		</div>
 	</body>
 </html>
