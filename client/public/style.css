@@ -1,8 +1,7 @@
 /* Global Attributes */
 
 :root {
-    --foreground: #f8cedd;
-    --background: #D48FA9;
+    --foreground: #B2A4FF;
     --neutral-dark: #424242;
     --neutral-light: #fff;
 }
@@ -10,9 +9,6 @@
 * {
     margin: 0;
     padding: 0;
-}
-
-html > * {
     box-sizing: border-box;
 }
 
@@ -37,20 +33,25 @@ body {
     width: 100vw;
 }
 
+/* Id Selectors */
+
+#form-short {
+    position: relative;
+}
+
 /* Class Selectors */
 
 .brutal {
     border: 2px solid var(--neutral-dark);
     box-shadow: 5px 5px var(--neutral-dark);
-    text-shadow: 1px 1px white;
-    transition: all 0.20s;
     font-weight: 600;
     font-size: 1.5rem;
+    transition: box-shadow 0.20s;
 }
 
-.brutal:focus, .brutal:hover {
+.brutal-animate:focus, .brutal-animate:hover {
     box-shadow: 2px 2px var(--neutral-dark);
-    transition: all 0.20s;
+    transition: box-shadow 0.20s;
 }
 
 .link-hero {
@@ -63,20 +64,62 @@ body {
     font-size: 0.75rem;
 }
 
+.link-input-wrapper {
+    display: inline;
+    position: relative;
+    width: 350px;
+    height: 60px;
+}
+
 .link-input {
     color: var(--neutral-dark);
-    width: 350px;
-    height: 1.5rem;
+    width: inherit;
+    height: 60px;
     padding: 1rem;
-    text-shadow: 1.75px 1.75px var(--foreground);
+    margin: 0.5rem 0;
+}
+
+.link-input::placeholder {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.link-invalid {
+    color: red;
+}
+
+.link-error {
+    position: relative;
+    display: none;
+    top: 18px;
+    left: 18px;
+}
+
+.link-invalid + .link-error {
+    color: red;
+    display: block;
+    font-size: 0.75rem;
+    position: absolute;
+    opacity: 0.5;
 }
 
 .link-submit {
     background-color: var(--foreground);
     color: var(--neutral-light);
-    height: 3.8rem;
+    height: 60px;
     margin-left: 0.25rem;
-    text-shadow: 1px 1px var(--neutral-dark);
+}
+
+.link-final-header {
+    color: var(--neutral-dark);
+    position: absolute;
+    top: 15px;
+    left: 18px;
+}
+
+.link-final {
+    width: 100%;
+    padding: 1rem;
 }
 
 .link-submit > span {
@@ -84,13 +127,47 @@ body {
     padding: 1rem;
 }
 
+.link-controls:focus, .link-controls:hover {
+    border-color: var(--neutral-dark);
+}
+
+.link-copy {
+    background-color: var(--neutral-dark);
+    box-shadow: 2px 2px var(--neutral-dark);
+    border: 1px solid var(--neutral-light);
+    cursor: pointer;
+    color: var(--neutral-light);
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 22px;
+    right: 10px;
+    transition: box-shadow 0.2s;
+}
+
+.link-copy:focus, .link-copy:hover {
+    background-color: var(--neutral-light);
+    border-color: var(--neutral-dark);
+    border-width: 1px;
+    box-shadow: 1px 1px var(--neutral-dark);
+    color: inherit;
+}
+
+.link-copy > span {
+    vertical-align: middle;
+}
+
 @media (max-width: 450px) {
     .link-input {
-        width: 200px;
-        height: 1rem;
+        width: 250px;
+        /* height: 1rem; */
     }
+}
 
-    .link-submit {
-        height: 3.2rem;
-    }
+/* TEMPPADPAWD<P A  :) */
+
+.confetti {
+    width: 10px;
+    height: 5px;
+    position: absolute;
 }
