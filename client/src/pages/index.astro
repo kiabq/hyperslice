@@ -1,6 +1,8 @@
 ---
 // I hate this, change import path plox
 import "../../public/style.css";
+import github from "../assets/github-mark.svg";
+import favicon from "../assets/favicon.svg";
 ---
 
 <html lang="en">
@@ -10,7 +12,8 @@ import "../../public/style.css";
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content="https://www.github.com/kiabq" />
 		<meta name="description" content="<INSERT DESCRIPTION HERE FUTURE KB>"/>
-		<title>Astro</title>
+		<link rel="icon" href={favicon.src} />
+		<title>Short-Link</title>
 		
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,8 +30,13 @@ import "../../public/style.css";
 	<body>
 		<div class="temp">
 			<div class="link-hero">
-				<h1>Short-Link</h1>
-				<p>or your creative name here!</p>
+				<div>
+					<h1>Short-Link</h1>
+					<p>or your creative name here!</p>
+				</div>
+				<a href="https://www.github.com/kiabq" target="_blank">
+					<img src={github.src} width={32} height={32} alt="Github Logo"/>
+				</a>
 			</div>
 
 			<form id="form-long" method="POST">

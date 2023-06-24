@@ -58,10 +58,12 @@ body {
     line-height: 0.75;
     padding-bottom: 1.5rem;
     position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
-.link-hero > span {
-    font-size: 0.75rem;
+.link-hero > div {
+    text-align: left;
 }
 
 .link-input-wrapper {
