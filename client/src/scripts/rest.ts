@@ -65,7 +65,7 @@ export default (function() {
         
         // Throw error for form to pick up
         if (bannedRegex.test(input.value)) {
-            input.setCustomValidity('Banned URL');
+            input.setCustomValidity("Banned URL");
         } else {
             post("http://localhost:3001/", { data: encodedURL })
                 .then((response) => {

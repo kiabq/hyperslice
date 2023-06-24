@@ -3,6 +3,7 @@
 import "../../public/style.css";
 import github from "../assets/github-mark.svg";
 import favicon from "../assets/favicon.svg";
+console.log(import.meta.env.ASTRO_APEX)
 ---
 
 <html lang="en">
@@ -12,7 +13,7 @@ import favicon from "../assets/favicon.svg";
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content="https://www.github.com/kiabq" />
 		<meta name="description" content="<INSERT DESCRIPTION HERE FUTURE KB>"/>
-		<link rel="icon" href={favicon.src} />
+		<!-- <link rel="icon" href={favicon.src} /> -->
 		<title>Short-Link</title>
 		
 		<!-- Fonts -->
@@ -35,7 +36,7 @@ import favicon from "../assets/favicon.svg";
 					<p>or your creative name here!</p>
 				</div>
 				<a href="https://www.github.com/kiabq" target="_blank">
-					<img src={github.src} width={32} height={32} alt="Github Logo"/>
+					<!-- <img src={github.src} width={32} height={32} alt="Github Logo"/> -->
 				</a>
 			</div>
 
