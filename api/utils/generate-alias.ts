@@ -48,14 +48,29 @@ async function createCode(pool: Pool, url: string) {
     }
 }
 
-export async function encode(pool: Pool, url: string) {
-    const code = await createCode(pool, url);
-
-    console.log("FINAL: ", code);
-
-    return null;
+async function fetchCode(pool: Pool, code: string) {
+    return await pool.query(`SELECT l.link FROM links l LEFT JOIN alias ON alias.link_id = l.id WHERE alias = '${code}'`)
+        .then((result) => {
+            const rows = result.rows;
+            if (rows.length > 0) {
+                return rows[0].link as string;
+            } else {
+                throw {
+                    name: "NotFound",
+                    error: "no link could be found for this alias"
+                }
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
 }
 
-export function decode(pool: Pool, url: string) {
+export async function encode(pool: Pool, url: string) {
+    const code = await createCode(pool, url);
+    return code;
+}
 
+export async function decode(pool: Pool, code: string) {
+    return await fetchCode(pool, code);
 }
