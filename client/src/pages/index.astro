@@ -3,7 +3,28 @@
 import "../../public/style.css";
 import github from "../assets/github-mark.svg";
 import favicon from "../assets/favicon.svg";
-console.log(import.meta.env.ASTRO_APEX)
+import Particles from "astro-particles";
+import type { ISourceOptions } from "tsparticles-engine";
+
+const options: ISourceOptions = {
+    fullScreen: {
+        zIndex: -1
+    },
+    particles: {
+        number: {
+            value: 100
+        },
+        move: {
+            enable: true
+        }
+    },
+	emitters: {
+		life: {
+		duration: 0,
+		},
+  	},
+  	preset: "confetti",
+};
 ---
 
 <html lang="en">
@@ -12,20 +33,30 @@ console.log(import.meta.env.ASTRO_APEX)
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content="https://www.github.com/kiabq" />
-		<meta name="description" content="<INSERT DESCRIPTION HERE FUTURE KB>"/>
+		<meta
+			name="description"
+			content="<INSERT DESCRIPTION HERE FUTURE KB>"
+		/>
 		<link rel="icon" href={favicon.src} />
 		<title>Short-Link</title>
-		
+
 		<!-- Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- Material Icons -->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0"
+		/>
 		<!-- Geologica Font -->
-		<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">		
+		<link
+			href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 		<!-- Scripts -->
 		<script src="../scripts/rest.ts"></script>
 		<script src="../scripts/controls.ts"></script>
+		<script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.10.1/tsparticles.confetti.bundle.min.js"></script>
 	</head>
 
 	<body>
@@ -36,46 +67,49 @@ console.log(import.meta.env.ASTRO_APEX)
 					<p>or your creative name here!</p>
 				</div>
 				<a href="https://github.com/kiabq/short-link" target="_blank">
-					<img src={github.src} width={32} height={32} alt="Github Logo"/>
+					<img
+						src={github.src}
+						width={32}
+						height={32}
+						alt="Github Logo"
+					/>
 				</a>
 			</div>
 
+			<div id="tsparticles"></div>
+
 			<form id="form-long" method="POST">
 				<div class="link-input-wrapper">
-					<input 
+					<input
 						id="link-input"
 						class="brutal brutal-animate link-input"
 						placeholder="your link goes here!"
-						type="text" 
+						type="text"
 						required
 						maxlength="2048"
 					/>
 					<p class="link-error"></p>
 				</div>
+
 				<button type="submit" class="link-submit brutal brutal-animate">
-					<span>
-						submit
-					</span>
+					<span> submit</span>
 				</button>
-				
 			</form>
 
 			<div id="form-short">
 				<div>
 					<h6 class="link-final-header">shortened link:</h6>
-					<input 					
+					<input
 						id="link-short"
 						class="brutal link-input link-final"
 						type="text"
-						autocomplete="off" 
+						autocomplete="off"
 						disabled
 					/>
 				</div>
 
 				<button class="link-copy" onclick="this.blur();" tabindex="0">
-					<span class="material-symbols-sharp">
-						content_copy
-					</span>
+					<span class="material-symbols-sharp"> content_copy</span>
 				</button>
 			</div>
 		</div>

@@ -115,7 +115,7 @@ body {
 .link-final-header {
     color: var(--neutral-dark);
     position: absolute;
-    top: 15px;
+    top: 12px;
     left: 18px;
 }
 
@@ -160,9 +160,8 @@ body {
 }
 
 @media (max-width: 450px) {
-    .link-input {
+    .link-input-wrapper {
         width: 250px;
-        /* height: 1rem; */
     }
 }
 
