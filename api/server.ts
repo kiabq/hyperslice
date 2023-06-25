@@ -4,7 +4,6 @@ import BodyParser = require('koa-bodyparser');
 import Logger = require('koa-logger');
 import { Pool } from 'pg';
 import { encode, decode } from './utils/generate-alias';
-import { Readable } from 'stream';
 
 // import https from 'https';
 // import Cors = require('@koa/cors');
