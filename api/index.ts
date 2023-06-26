@@ -5,7 +5,6 @@ import Logger = require('koa-logger');
 import { Pool } from 'pg';
 import { encode, decode } from './utils/generate-alias';
 require('dotenv').config();
-console.log(process.env);
 
 const app = new Koa();
 const router = new Router();
@@ -76,4 +75,4 @@ app
   .use(router.allowedMethods())
   .listen(3001)
 
-export default app;
+module.exports = app;
