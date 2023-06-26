@@ -4,27 +4,27 @@ import BodyParser = require('koa-bodyparser');
 import Logger = require('koa-logger');
 import { Pool } from 'pg';
 import { encode, decode } from './utils/generate-alias';
-
-// import https from 'https';
-// import Cors = require('@koa/cors');
+require('dotenv').config();
+console.log(process.env);
 
 const app = new Koa();
 const router = new Router();
 const pool = new Pool({
-  host: 'localhost',
-  user: 'postgres',
+  host: process.env.POSTGRES_HOST,
+  user: process.env.POSTGRES_USER,
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000
+  connectionTimeoutMillis: 2000,
 });
 
 router.get('/:id', async (ctx) => {
   const code = (ctx.request.url.split('/'))[1];
   const link = await decode(pool, code);
   if (link) {
-    let temp = decodeURIComponent(link);
+    const URL = decodeURIComponent(link);
     ctx.status = 301;
-    ctx.redirect(temp);
+    ctx.redirect(URL);
   } else {
     ctx.body = "ERROROAROARKOA"
   }

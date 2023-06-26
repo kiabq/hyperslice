@@ -2,16 +2,12 @@
   "name": "short-link",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "dev-api": "nodemon api/server.ts"
+    "dev": "nodemon index.ts",
+    "start": "ts-node index.ts"
   },
   "dependencies": {
     "@koa/cors": "^4.0.0",
-    "astro": "^2.6.5",
+    "dotenv": "^16.3.1",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.0",
     "koa-json": "^2.0.2",

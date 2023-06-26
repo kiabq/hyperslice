@@ -9,5 +9,5 @@
       "experimentalDecorators": true,
       "esModuleInterop": true
     },
-    "include": ["server.ts"],
+    "include": ["index.ts"],
 }
