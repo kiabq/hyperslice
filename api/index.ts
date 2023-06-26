@@ -75,3 +75,5 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
   .listen(3001)
+
+  export default app;
