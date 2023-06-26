@@ -29,7 +29,7 @@ export default (function() {
     const input = document.querySelector("#link-input") as HTMLInputElement;
     const inputError = document.querySelector('.link-error') as HTMLSpanElement;
     const shortened = document.querySelector("#link-short") as HTMLInputElement;
-    const banned = import.meta.env.PUBLIC_APEX;
+    const banned = import.meta.env.PUBLIC_BACKEND_URL;
     const bannedRegex = new RegExp(banned, "i");
 
     // What in the everloving fuck is this??
@@ -67,7 +67,7 @@ export default (function() {
         if (bannedRegex.test(input.value)) {
             input.setCustomValidity("Banned URL");
         } else {
-            post(`http://${import.meta.env.BACKEND_URL}`, { data: encodedURL })
+            post(`http://${import.meta.env.PUBLIC_BACKEND_URL}`, { data: encodedURL })
                 .then((response) => {
                     form.reset();
                     shortened.value = response.data;
