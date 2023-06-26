@@ -18,6 +18,7 @@ const pool = new Pool({
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
 });
+const backend_url = process.env.BACKEND_URL;
 
 router.get('/', async (ctx) => {
   ctx.body = "Hello!";
@@ -51,7 +52,7 @@ router.post('/', async (ctx) => {
     }
 
     const code = await encode(pool, url);
-    ctx.response.body = { message: 'POST Success', data: `${process.env.BACKEND_URL}/${code}` };
+    ctx.response.body = { message: 'POST Success', data: backend_url + `/${code}`};
     ctx.status = 200;
     ctx.body = ctx.response.body;
   } catch(error) {
