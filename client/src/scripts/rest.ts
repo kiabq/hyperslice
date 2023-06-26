@@ -59,7 +59,8 @@ export default (function() {
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-
+        
+        const apex = import.meta.env.PUBLIC_BACKEND_URL;
         const url = checkHTTP(input.value);
         const encodedURL = encodeURIComponent(url);
         
@@ -67,7 +68,7 @@ export default (function() {
         if (bannedRegex.test(input.value)) {
             input.setCustomValidity("Banned URL");
         } else {
-            post(`${import.meta.env.PUBLIC_BACKEND_URL}`, { data: encodedURL })
+            post(apex, { data: encodedURL })
                 .then((response) => {
                     form.reset();
                     shortened.value = response.data;
