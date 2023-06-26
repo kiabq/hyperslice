@@ -1,7 +1,6 @@
 {
     "version": 2,
     "builds": [
-      { "src": "client/*", "use": "@astrojs/vercel" },
       { "src": "api/*", "use": "@vercel/node" }
     ],
     "routes": [
