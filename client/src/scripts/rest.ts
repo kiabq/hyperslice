@@ -72,6 +72,9 @@ export default (function() {
                     form.reset();
                     shortened.value = response.data;
                 })
+                .catch((err) => {
+                    console.log(err);
+                })
         }
     })
 })();
