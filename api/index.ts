@@ -50,8 +50,8 @@ router.post('/', async (ctx) => {
       await pool.query(`INSERT INTO links (link) values ('${url}')`);
     }
 
-    const body = await encode(pool, url);
-    ctx.response.body = { message: 'POST Success', data: 'localhost:3001/' + body };
+    const code = await encode(pool, url);
+    ctx.response.body = { message: 'POST Success', data: `${process.env.BACKEND_URL}/${code}` };
     ctx.status = 200;
     ctx.body = ctx.response.body;
   } catch(error) {

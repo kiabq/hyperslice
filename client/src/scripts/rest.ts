@@ -67,7 +67,7 @@ export default (function() {
         if (bannedRegex.test(input.value)) {
             input.setCustomValidity("Banned URL");
         } else {
-            post("http://localhost:3001/", { data: encodedURL })
+            post(`http://${process.env.BACKEND_URL}`, { data: encodedURL })
                 .then((response) => {
                     form.reset();
                     shortened.value = response.data;
