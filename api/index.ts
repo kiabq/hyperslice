@@ -2,11 +2,15 @@ import Koa = require('koa');
 import Router = require('koa-router');
 import BodyParser = require('koa-bodyparser');
 import Logger = require('koa-logger');
+import Cors = require("@koa/cors");
 import { Pool } from 'pg';
 import { encode, decode } from './utils/generate-alias';
 require('dotenv').config();
 
 const app = new Koa();
+app.use(Cors());
+app.use(BodyParser());
+
 const router = new Router();
 const pool = new Pool({
   host: process.env.POSTGRES_HOST,
@@ -16,7 +20,7 @@ const pool = new Pool({
   database: process.env.POSTGRES_DATABASE,
   max: 100,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 5000,
 });
 const backend_url = process.env.BACKEND_URL;
 
@@ -61,17 +65,6 @@ router.post('/', async (ctx) => {
   }
 });
 
-app.use(async (ctx, next) => {
-  ctx.set('vary', 'Origin');
-  // Change to actual origin for deployment
-  ctx.set('Access-Control-Allow-Origin', '*');
-  ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-  
-  await next();
-});
-
-app.use(BodyParser());
 app
   .use(Logger())
   .use(router.routes())
