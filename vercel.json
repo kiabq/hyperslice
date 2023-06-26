@@ -1,6 +1,7 @@
 {
     "version": 2,
     "builds": [
+      { "src": "client/*", "use": "@astro/vercel" },
       { "src": "api/*", "use": "@vercel/node" }
     ],
     "routes": [
