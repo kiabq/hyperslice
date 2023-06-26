@@ -67,14 +67,12 @@ export default (function() {
         if (bannedRegex.test(input.value)) {
             input.setCustomValidity("Banned URL");
         } else {
-            post(`http://${import.meta.env.PUBLIC_BACKEND_URL}`, { data: encodedURL })
+            post(`${import.meta.env.PUBLIC_BACKEND_URL}`, { data: encodedURL })
                 .then((response) => {
                     form.reset();
                     shortened.value = response.data;
                 })
-                .catch((err) => {
-                    console.log(err);
-                })
+                .catch((err) => {/* Do Something*/})
         }
     })
 })();
