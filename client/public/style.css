@@ -15,7 +15,7 @@
 /* add input here and other elements */
 input, button {
     outline: none;
-    background: none;
+    background: var(--neutral-light);
     border-radius: 0;
     border: none;
 }
