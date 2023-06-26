@@ -3,6 +3,7 @@
 import "../../public/style.css";
 import github from "../assets/github-mark.svg";
 import favicon from "../assets/favicon.svg";
+import wave from "../assets/wave.svg";
 ---
 
 <html lang="en">
@@ -22,23 +23,17 @@ import favicon from "../assets/favicon.svg";
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- Material Icons -->
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0"
-		/>
-		<!-- Geologica Font -->
-		<link
-			href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;300;400;500;600;700&display=swap"
-			rel="stylesheet"
-		/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0"/>
+		<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet"> 
 	</head>
 
-	<body>
-		<div class="temp">
+	<body style=`background-image: ${wave.src};`>
+		<div>
 			<div class="link-hero">
 				<div>
-					<h1>Short-Link</h1>
-					<p>or your creative name here!</p>
+					<h1 class="hero-header">HyperSlice</h1>
+					<span>ˈhaɪpər</span>
+					<span>slaɪs</span>
 				</div>
 				<a href="https://github.com/kiabq/short-link" target="_blank">
 					<img

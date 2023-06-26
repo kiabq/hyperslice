@@ -22,10 +22,15 @@ input, button {
 
 html {
     font-family: 'Geologica', sans-serif;
+    font-weight: 600;
     text-align: center;
 }
 
 body {
+    background-image: url('../src/assets/wave.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 150%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,6 +45,16 @@ body {
 }
 
 /* Class Selectors */
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#wave {
+    position: relative;
+}
 
 .brutal {
     border: 2px solid var(--neutral-dark);
@@ -64,6 +79,14 @@ body {
 
 .link-hero > div {
     text-align: left;
+}
+
+.hero-header {
+    padding-bottom: 0.5rem;
+}
+
+.pro-slice {
+    margin-left: 2.75rem;
 }
 
 .link-input-wrapper {
@@ -163,12 +186,4 @@ body {
     .link-input-wrapper {
         width: 250px;
     }
-}
-
-/* TEMPPADPAWD<P A  :) */
-
-.confetti {
-    width: 10px;
-    height: 5px;
-    position: absolute;
 }
