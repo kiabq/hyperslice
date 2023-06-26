@@ -18,6 +18,10 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000,
 });
 
+router.get('/', async (ctx) => {
+  ctx.body = "Hello!";
+});
+
 router.get('/:id', async (ctx) => {
   const code = (ctx.request.url.split('/'))[1];
   const link = await decode(pool, code);
