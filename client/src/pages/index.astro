@@ -60,8 +60,9 @@ import wave from "../assets/wave.svg";
 					<p class="link-error"></p>
 				</div>
 
-				<button type="submit" class="link-submit brutal brutal-animate">
-					<span> submit</span>
+				<button type="submit" id="link-submit" class="link-submit brutal brutal-animate">
+					<span id="submit-text">submit</span>
+					<div id="submit-loader" class="lds-ellipsis hide"><div></div><div></div><div></div><div></div></div>
 				</button>
 			</form>
 
@@ -78,7 +79,7 @@ import wave from "../assets/wave.svg";
 				</div>
 
 				<button class="link-copy" onclick="this.blur();" tabindex="0">
-					<span class="material-symbols-sharp"> content_copy</span>
+					<span class="material-symbols-sharp">content_copy</span>
 				</button>
 			</div>
 		</div>

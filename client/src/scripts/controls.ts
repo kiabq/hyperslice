@@ -1,5 +1,5 @@
 export default (function() {
-    const shortened = document.querySelector("#link-short") as HTMLInputElement;
+    const shortened = document.getElementById("link-short") as HTMLInputElement;
     const copy = document.querySelector(".link-copy") as HTMLButtonElement;
     
     // 1. When user click copy, if writeText() is successful, shoot confetti out
