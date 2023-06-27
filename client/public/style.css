@@ -39,7 +39,6 @@ body {
     width: 100vw;
 }
 
-
 /* Id Selectors */
 
 #form-short {
@@ -260,7 +259,7 @@ body {
         width: 64.5%;
     }
 
-    body>div {
+    body > div:nth-child(1) {
         width: 340px;
     }
 }
