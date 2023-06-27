@@ -254,6 +254,15 @@ body {
     vertical-align: middle;
 }
 
+.link-qr {
+    width: inherit;
+    display: flex;
+}
+
+.link-qr > canvas {
+    position: absolute;
+}
+
 @media (max-width: 450px) {
     .link-input-wrapper>.link-input {
         width: 64.5%;

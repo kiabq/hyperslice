@@ -44,6 +44,8 @@ router.post('/', async (ctx) => {
   const urlPattern = new RegExp(/^(http|https):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
   const url = ctx.request.body['data'];
 
+  console.log("Reached");
+
   try {
     if (!urlPattern.test(decodeURIComponent(url))) {
       throw new Error('Invalid URL: ' + url);

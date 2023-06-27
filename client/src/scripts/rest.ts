@@ -1,3 +1,5 @@
+import QRious from 'qrious';
+
 async function post(url: string, data={}) {    
     const response = await fetch(url, {
         method: "POST",
@@ -71,6 +73,8 @@ export default (function() {
         }
     })
 
+    console.log("Submitted")
+
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         
@@ -88,8 +92,13 @@ export default (function() {
                     form.reset();
                     removeLoader();
                     shortened.value = response.data;
+                    new QRious({
+                        element: document.getElementById("qr"),
+                        value: shortened.value
+                    })
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.log('error', err)
                     removeLoader();
                 })
         }
