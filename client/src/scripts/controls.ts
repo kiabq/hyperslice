@@ -1,6 +1,8 @@
 export default (function() {
     const shortened = document.getElementById("link-short") as HTMLInputElement;
     const copy = document.querySelector(".link-copy") as HTMLButtonElement;
+    const qr = document.getElementById("qr") as HTMLCanvasElement;
+    const png = document.getElementById("qr-png") as HTMLButtonElement;
     
     // 1. When user click copy, if writeText() is successful, shoot confetti out
     function toClipboard() {

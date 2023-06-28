@@ -33,6 +33,10 @@ export default (function() {
     const submit = document.getElementById("link-submit") as HTMLButtonElement;
     const submitText = document.getElementById("submit-text") as HTMLSpanElement;
     const submitLoader = document.getElementById("submit-loader") as HTMLSpanElement;
+    const qrwrapper = document.getElementById("qr-wrapper");
+    const png = document.getElementById("qr-png");
+    const webp = document.getElementById("qr-webp");
+    const jpg = document.getElementById("qr-jpg");
     const banned = import.meta.env.PUBLIC_BACKEND_URL;
     const bannedRegex = new RegExp(banned, "i");
 
@@ -73,15 +77,14 @@ export default (function() {
         }
     })
 
-    console.log("Submitted")
-
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         
         const apex = import.meta.env.PUBLIC_BACKEND_URL;
         const url = checkHTTP(input.value);
         const encodedURL = encodeURIComponent(url);
-        
+        let qr = null;
+
         useLoader();
 
         if (bannedRegex.test(input.value)) {
@@ -91,14 +94,38 @@ export default (function() {
                 .then((response) => {
                     form.reset();
                     removeLoader();
-                    shortened.value = response.data;
-                    new QRious({
+
+                    if (qrwrapper instanceof HTMLDivElement) {
+                        if (qrwrapper.classList.contains('hide')) {
+                            qrwrapper.classList.remove('hide');
+                        }
+                    }
+
+                    console.log(response.code);
+
+                    shortened.value = response.data.url;
+                    qr = new QRious({
                         element: document.getElementById("qr"),
-                        value: shortened.value
-                    })
+                        value: shortened.value,
+                        size: 150
+                    });
+
+                    if (png instanceof HTMLAnchorElement) {
+                        png.href = qr.toDataURL("image/png");
+                        png.download = response.data.code;
+                    }
+                    
+                    if (webp instanceof HTMLAnchorElement) {
+                        webp.href = qr.toDataURL("image/webp");
+                        webp.download = response.data.code;
+                    }
+
+                    if (jpg instanceof HTMLAnchorElement) {
+                        jpg.href = qr.toDataURL("image/jpeg");
+                        jpg.download = response.data.code;
+                    }
                 })
-                .catch((err) => {
-                    console.log('error', err)
+                .catch(() => {
                     removeLoader();
                 })
         }

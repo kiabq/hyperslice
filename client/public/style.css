@@ -32,6 +32,7 @@ body {
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: 150%;
+    color: var(--neutral-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,7 +97,6 @@ body {
 }
 
 .link-input {
-    color: var(--neutral-dark);
     width: inherit;
     height: 60px;
     padding: 1rem;
@@ -130,6 +130,7 @@ body {
 .link-submit {
     background-color: var(--foreground);
     color: var(--neutral-light);
+    cursor: pointer;
     height: 60px;
     width: 110px;
     margin-left: 0.25rem;
@@ -211,7 +212,6 @@ body {
 
 
 .link-final-header {
-    color: var(--neutral-dark);
     position: absolute;
     top: 12px;
     left: 18px;
@@ -254,13 +254,39 @@ body {
     vertical-align: middle;
 }
 
-.link-qr {
+.link-qr-wrapper {
+    height: 150px;
     width: inherit;
+    position: absolute;
+    margin-top: 1rem;
+}
+
+.link-qr-wrapper > h2 {
+    padding-bottom: 0.5rem;
+}
+
+.link-qr {
     display: flex;
 }
 
 .link-qr > canvas {
-    position: absolute;
+    border: 5px solid white;
+}
+
+.qr-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 0.5rem;
+}
+
+.qr-button {
+    background-color: var(--foreground);
+    color: var(--neutral-light);
+    cursor: pointer;
+    height: 40px;
+    width: 90px;
+    text-decoration: none;
 }
 
 @media (max-width: 450px) {

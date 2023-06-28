@@ -45,8 +45,6 @@ import wave from "../assets/wave.svg";
 				</a>
 			</div>
 
-			<div id="tsparticles"></div>
-
 			<form id="form-long">
 				<div class="link-input-wrapper">
 					<input
@@ -83,8 +81,16 @@ import wave from "../assets/wave.svg";
 				</button>
 			</div>
 
-			<div class="link-qr">
-				<canvas id="qr"/>
+			<div id="qr-wrapper" class="link-qr-wrapper hide">
+				<h2>QR Code</h2>
+				<div class="link-qr">
+					<canvas id="qr"/>
+					<div class="qr-controls">
+						<a id="qr-png" class="qr-button brutal brutal-animate" download>PNG</a>
+						<a id="qr-webp" class="qr-button brutal brutal-animate" download>WEBP</a>
+						<a id="qr-jpg" class="qr-button brutal brutal-animate" download>JPG</a>
+					</div>
+				</div>
 			</div>
 		</div>
 
