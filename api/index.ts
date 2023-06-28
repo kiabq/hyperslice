@@ -44,8 +44,6 @@ router.post('/', async (ctx) => {
   const urlPattern = new RegExp(/^(http|https):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
   const url = ctx.request.body['data'];
 
-  console.log("Reached");
-
   try {
     if (!urlPattern.test(decodeURIComponent(url))) {
       throw new Error('Invalid URL: ' + url);
@@ -58,7 +56,13 @@ router.post('/', async (ctx) => {
     }
 
     const code = await encode(pool, url);
-    ctx.response.body = { message: 'POST Success', data: backend_url + `/${code}`};
+    ctx.response.body = { 
+      message: 'POST Success', 
+      data: { 
+        url: backend_url + `/${code}`, 
+        code: code 
+      }
+    };
     ctx.status = 200;
     ctx.body = ctx.response.body;
   } catch(error) {
