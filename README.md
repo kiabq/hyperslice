@@ -1,7 +1,7 @@
 # HyperSlice
 
 <div align="center">
-  <img src="https://i.imgur.com/KjoOGRb.gif"/>
+  <img src="https://i.imgur.com/AqTyqdV.gif"/>
 </div>
 
 ## About
