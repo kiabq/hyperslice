@@ -101,8 +101,6 @@ export default (function() {
                         }
                     }
 
-                    console.log(response.code);
-
                     shortened.value = response.data.url;
                     qr = new QRious({
                         element: document.getElementById("qr"),
