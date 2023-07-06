@@ -24,19 +24,17 @@ const pool = new Pool({
 });
 const backend_url = process.env.BACKEND_URL;
 
-router.get('/', async (ctx) => {
-  ctx.body = "Hello!";
-});
-
 router.get('/:id', async (ctx) => {
   const code = (ctx.request.url.split('/'))[1];
   const link = await decode(pool, code);
+
   if (link) {
     const URL = decodeURIComponent(link);
     ctx.status = 301;
     ctx.redirect(URL);
   } else {
-    ctx.body = "ERROROAROARKOA"
+    ctx.status = 500;
+    ctx.redirect(`http://${process.env.FRONTEND_URL}/500`);
   }
 });
 
@@ -66,7 +64,7 @@ router.post('/', async (ctx) => {
     ctx.status = 200;
     ctx.body = ctx.response.body;
   } catch(error) {
-    ctx.status = 413;
+    ctx.status = 418;
     ctx.body = { error: 'POST Failed', reason: error.message };
   }
 });
