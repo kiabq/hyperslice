@@ -2,6 +2,7 @@
 
 :root {
     --foreground: #B2A4FF;
+    --foreground-light: #D6CFFF;
     --neutral-dark: #424242;
     --neutral-light: #fff;
 }
@@ -89,6 +90,8 @@ body {
     margin-left: 2.75rem;
 }
 
+/* Long Link Input */
+
 .link-input-wrapper {
     display: inline;
     position: relative;
@@ -126,6 +129,8 @@ body {
     position: absolute;
     opacity: 0.5;
 }
+
+/* Submit Button */
 
 .link-submit {
     background-color: var(--foreground);
@@ -210,6 +215,7 @@ body {
     }
 }
 
+/* Shortened Link Styles */
 
 .link-final-header {
     position: absolute;
@@ -254,6 +260,8 @@ body {
     vertical-align: middle;
 }
 
+/* Link QR Code */
+
 .link-qr-wrapper {
     height: 150px;
     width: inherit;
@@ -289,6 +297,8 @@ body {
     text-decoration: none;
 }
 
+/* Media Queries */
+
 @media (max-width: 450px) {
     .link-input-wrapper>.link-input {
         width: 64.5%;
@@ -297,4 +307,28 @@ body {
     body > div:nth-child(1) {
         width: 340px;
     }
+}
+
+.brutalbig {
+    display: block;
+    font-size: 7rem;
+    color: var(--neutral-dark);
+    text-shadow: 5px 3px var(--foreground);
+}
+
+.error-back {
+    background-color: var(--neutral-dark);
+    border: 1px solid white;
+    color: var(--neutral-light);
+    display: inline-block;
+    font-size: 1rem;
+    text-decoration: none;
+    width: 90px;
+    height: 40px;
+    margin: 0.5rem;
+}
+
+.error-back > p {
+    display: block;
+    margin-top: 10px;
 }
