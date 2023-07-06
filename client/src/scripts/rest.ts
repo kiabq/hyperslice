@@ -90,10 +90,13 @@ export default (function() {
         if (bannedRegex.test(input.value)) {
             input.setCustomValidity("Banned URL");
         } else {
-            post(apex, { data: encodedURL })
+            post('http://' + apex, { data: encodedURL })
                 .then((response) => {
-                    form.reset();
                     removeLoader();
+
+                    if (response.error) {
+                        throw response;
+                    }
 
                     if (qrwrapper instanceof HTMLDivElement) {
                         if (qrwrapper.classList.contains('hide')) {
@@ -122,8 +125,13 @@ export default (function() {
                         jpg.href = qr.toDataURL("image/jpeg");
                         jpg.download = response.data.code;
                     }
+
+                    form.reset();
                 })
-                .catch(() => {
+                .catch((error) => {
+                    input.setCustomValidity(error.reason);
+                    input.classList.add("link-invalid");
+                    inputError.innerText = input.validationMessage.toLowerCase();
                     removeLoader();
                 })
         }
