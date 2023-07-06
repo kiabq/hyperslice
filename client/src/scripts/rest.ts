@@ -37,8 +37,10 @@ export default (function() {
     const png = document.getElementById("qr-png");
     const webp = document.getElementById("qr-webp");
     const jpg = document.getElementById("qr-jpg");
-    const banned = import.meta.env.PUBLIC_BACKEND_URL;
+    const banned = import.meta.env.PUBLIC_BANNED_URL;
     const bannedRegex = new RegExp(banned, "i");
+
+    console.log(banned);
 
     function useLoader() {
         submit.disabled = true;
