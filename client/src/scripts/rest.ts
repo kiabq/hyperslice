@@ -54,7 +54,6 @@ export default (function() {
         submitLoader.classList.add('hide');
     }
 
-    // What in the everloving fuck is this??
     input.addEventListener("invalid", (e) => {
         e.preventDefault();
         inputError.innerText = input.validationMessage.toLowerCase();
