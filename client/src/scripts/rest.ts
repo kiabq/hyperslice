@@ -40,8 +40,6 @@ export default (function() {
     const banned = import.meta.env.PUBLIC_BANNED_URL;
     const bannedRegex = new RegExp(banned, "i");
 
-    console.log(banned);
-
     function useLoader() {
         submit.disabled = true;
         submitText.classList.add('hide');

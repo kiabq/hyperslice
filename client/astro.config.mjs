@@ -4,5 +4,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
     experimental: {
         assets: true
-    }
+    },
+    adapter: vercel({
+        webAnalytics: {
+            enabled: true
+        }
+    })
 });
