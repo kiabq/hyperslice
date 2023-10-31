@@ -57,7 +57,7 @@ router.post('/', async (ctx) => {
     ctx.response.body = { 
       message: 'POST Success', 
       data: { 
-        url: backend_url + `/${code}`, 
+        url: `https://${backend_url}/${code}`, 
         code: code 
       }
     };

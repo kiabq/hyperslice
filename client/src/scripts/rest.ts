@@ -20,9 +20,9 @@ function checkHTTP(url: string) {
 
     if (!beginsWith.test(url)) {
         return "http://" + url;
-    } else {
-        return url;
     }
+
+    return url;
 }
 
 export default (function() {
@@ -104,6 +104,7 @@ export default (function() {
                     }
 
                     shortened.value = response.data.url;
+                    
                     qr = new QRious({
                         element: document.getElementById("qr"),
                         value: shortened.value,
