@@ -32,6 +32,9 @@ router.get('/:id', async (ctx) => {
     const URL = decodeURIComponent(link);
     ctx.status = 301;
     ctx.redirect(URL);
+  } else if (!link) {
+    ctx.status = 404;
+    ctx.redirect(`http://${process.env.FRONTEND_URL}/404`);
   } else {
     ctx.status = 500;
     ctx.redirect(`http://${process.env.FRONTEND_URL}/500`);
