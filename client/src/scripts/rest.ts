@@ -65,13 +65,16 @@ export default (function() {
         input.setCustomValidity("");
 
         if (bannedRegex.test(element.value)) {
+            submit.disabled = true;
             input.setCustomValidity("Banned URL");
             input.classList.add("link-invalid");
             inputError.innerText = input.validationMessage.toLowerCase();
         } else if (!input.validity.valid) {
+            submit.disabled = true;
             input.classList.add("link-invalid");
             inputError.innerText = input.validationMessage.toLowerCase();
         } else {
+            submit.disabled = false;
             input.classList.remove("link-invalid");
         }
     })

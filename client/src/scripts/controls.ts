@@ -20,7 +20,7 @@ export default (function() {
                 });
             })
             // Trigger Failed
-            .catch(/* Do Something */)
+            .catch(/* Do nothing */)
     }
 
     copy.addEventListener("click", () => {    
