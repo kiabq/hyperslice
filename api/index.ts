@@ -45,6 +45,8 @@ router.post('/', async (ctx) => {
   const urlPattern = new RegExp(/^(http|https):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
   const url = ctx.request.body['data'];
 
+  throw new Error("Shortening is Currently Disabled");
+
   try {
     if (!urlPattern.test(decodeURIComponent(url))) {
       throw new Error('Invalid URL: ' + url);
