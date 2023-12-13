@@ -47,7 +47,7 @@ router.post('/', async (ctx) => {
   const url = ctx.request.body['data'];
 
   try {
-    const check = await fetch(url, {});
+    const check = await fetch(decodeURIComponent(url), {});
     if (!check.ok) {
       throw new Error('Invalid URL: ' + url);
     }
