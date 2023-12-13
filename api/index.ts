@@ -11,6 +11,7 @@ const app = new Koa();
 app.use(Cors());
 app.use(BodyParser());
 
+
 const router = new Router();
 const pool = new Pool({
   host: process.env.POSTGRES_HOST,
@@ -45,14 +46,16 @@ router.post('/', async (ctx) => {
   const urlPattern = new RegExp(/^(http|https):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
   const url = ctx.request.body['data'];
 
-
   try {
-    throw new Error("Shortening is Currently Disabled");
+    const check = await fetch(url, {});
+    if (!check.ok) {
+      throw new Error('Invalid URL: ' + url);
+    }
 
     if (!urlPattern.test(decodeURIComponent(url))) {
       throw new Error('Invalid URL: ' + url);
     }
-    
+
     const result = await pool.query(`SELECT link FROM links WHERE link = '${url}'`);
     const isInTable = result.rows.length;
     if (!isInTable) {
