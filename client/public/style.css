@@ -41,6 +41,14 @@ body {
     width: 100vw;
 }
 
+@font-face {
+    font-family: 'Geologica';
+    src: url('/fonts/geologica.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Id Selectors */
 
 #form-short {
@@ -235,6 +243,7 @@ body {
 
 .link-copy {
     background-color: var(--neutral-dark);
+    border-color: white;
     box-shadow: 2px 2px var(--neutral-dark);
     border: 1px solid var(--neutral-light);
     cursor: pointer;
@@ -245,19 +254,23 @@ body {
     top: 22px;
     right: 10px;
     transition: box-shadow 0.2s;
-}
 
-.link-copy:focus,
-.link-copy:hover {
-    background-color: var(--neutral-light);
-    border-color: var(--neutral-dark);
-    border-width: 1px;
-    box-shadow: 1px 1px var(--neutral-dark);
-    color: inherit;
-}
+    & svg {
+        vertical-align: middle;
+        filter: grayscale(1) invert(1);
+    }
+    &:hover,
+    &:focus {
+        & svg {
+            filter: grayscale(0) invert(0);
+        }
 
-.link-copy>span {
-    vertical-align: middle;
+        background-color: var(--neutral-light);
+        border-color: var(--neutral-dark);
+        border-width: 1px;
+        box-shadow: 1px 1px var(--neutral-dark);
+        color: inherit;
+    }
 }
 
 /* Link QR Code */
