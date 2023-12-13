@@ -92,7 +92,7 @@ export default (function() {
         if (bannedRegex.test(input.value)) {
             input.setCustomValidity("Banned URL");
         } else {
-            post('https://' + apex, { data: encodedURL })
+            post(`${import.meta.env.PROD ? 'https://' : 'http://'}` + apex, { data: encodedURL })
                 .then((response) => {
                     removeLoader();
 
