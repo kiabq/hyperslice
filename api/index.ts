@@ -11,7 +11,6 @@ const app = new Koa();
 app.use(Cors());
 app.use(BodyParser());
 
-
 const router = new Router();
 const pool = new Pool({
   host: process.env.POSTGRES_HOST,
@@ -46,8 +45,12 @@ router.post('/', async (ctx) => {
   const urlPattern = new RegExp(/^(http|https):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
   const url = ctx.request.body['data'];
 
+  ctx.status = 403;
+  ctx.body = { error: "Link shortening is temporarily disabled. Come back soon :)"}
+  return;
+  
   try {
-    const check = await fetch(url, {});
+    const check = await fetch(decodeURIComponent(url));
     if (!check.ok) {
       throw new Error('Invalid URL: ' + url);
     }
