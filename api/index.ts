@@ -50,7 +50,11 @@ router.post('/', async (ctx) => {
   return;
   
   try {
+<<<<<<< HEAD
     const check = await fetch(decodeURIComponent(url));
+=======
+    const check = await fetch(decodeURIComponent(url), {});
+>>>>>>> bd081ec9c7fe2baf102cd0210ff79f13ce90f0a9
     if (!check.ok) {
       throw new Error('Invalid URL: ' + url);
     }
