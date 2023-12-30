@@ -45,16 +45,9 @@ router.post('/', async (ctx) => {
   const urlPattern = new RegExp(/^(http|https):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/);
   const url = ctx.request.body['data'];
 
-  ctx.status = 403;
-  ctx.body = { error: "Link shortening is temporarily disabled. Come back soon :)"}
-  return;
-  
   try {
-<<<<<<< HEAD
+    throw new Error("Link shortening is temporarily disabled. Come back soon :)");
     const check = await fetch(decodeURIComponent(url));
-=======
-    const check = await fetch(decodeURIComponent(url), {});
->>>>>>> bd081ec9c7fe2baf102cd0210ff79f13ce90f0a9
     if (!check.ok) {
       throw new Error('Invalid URL: ' + url);
     }
