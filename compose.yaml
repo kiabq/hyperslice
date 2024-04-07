@@ -1,0 +1,11 @@
+services:
+  frontend:
+    build: ./client/.
+    ports:
+      - "4321:4321"
+    container_name: hyperslice-frontend
+  api:
+    build: ./api/.
+    ports:
+      - "3001:3001"
+    container_name: hyperslice-api
