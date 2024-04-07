@@ -9,8 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^3.8.2",
-    "astro": "^2.6.5",
+    "@astrojs/node": "^8.2.5",
+    "astro": "^4.5.16",
     "qrious": "^4.0.2"
   }
 }
