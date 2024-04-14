@@ -15,14 +15,15 @@ const router = new Router();
 const pool = new Pool({
   host: process.env.POSTGRES_HOST,
   user: process.env.POSTGRES_USER,
-  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+  connectionString: process.env.POSTGRES_URL,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DATABASE,
+  ssl: false,
   max: 100,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
 });
-const backend_url = process.env.BACKEND_URL;
+const backend_url = 'localhost:3000';
 
 router.get('/:id', async (ctx) => {
   const code = (ctx.request.url.split('/'))[1];
@@ -46,12 +47,6 @@ router.post('/', async (ctx) => {
   const url = ctx.request.body['data'];
 
   try {
-    throw new Error("Link shortening is temporarily disabled. Come back soon :)");
-    const check = await fetch(decodeURIComponent(url));
-    if (!check.ok) {
-      throw new Error('Invalid URL: ' + url);
-    }
-
     if (!urlPattern.test(decodeURIComponent(url))) {
       throw new Error('Invalid URL: ' + url);
     }
@@ -66,7 +61,7 @@ router.post('/', async (ctx) => {
     ctx.response.body = { 
       message: 'POST Success', 
       data: { 
-        url: `https://${backend_url}/${code}`, 
+        url: `http://${backend_url}/${code}`, 
         code: code 
       }
     };
@@ -82,6 +77,6 @@ app
   .use(Logger())
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(3001)
+  .listen(3002)
 
 module.exports = app;
