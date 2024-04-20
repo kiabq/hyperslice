@@ -11,7 +11,7 @@ services:
     build: ./api/.
     restart: unless-stopped
     ports:
-      - "3002:3002"
+      - "3000:3000"
     depends_on:
       - db
     networks:
