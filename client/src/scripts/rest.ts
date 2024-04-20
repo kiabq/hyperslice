@@ -37,8 +37,6 @@ export default (function() {
     const png = document.getElementById("qr-png");
     const webp = document.getElementById("qr-webp");
     const jpg = document.getElementById("qr-jpg");
-    const banned = import.meta.env.PUBLIC_BANNED_URL;
-    const bannedRegex = new RegExp(banned, "i");
 
     function useLoader() {
         submit.disabled = true;
@@ -61,15 +59,17 @@ export default (function() {
     })
 
     input.addEventListener("input", (e) => {
-        const element = (e.target as HTMLInputElement);
+        // const element = (e.target as HTMLInputElement);
         input.setCustomValidity("");
 
-        if (bannedRegex.test(element.value)) {
-            submit.disabled = true;
-            input.setCustomValidity("Banned URL");
-            input.classList.add("link-invalid");
-            inputError.innerText = input.validationMessage.toLowerCase();
-        } else if (!input.validity.valid) {
+        // if (bannedRegex.test(element.value)) {
+        //     submit.disabled = true;
+        //     input.setCustomValidity("Banned URL");
+        //     input.classList.add("link-invalid");
+        //     inputError.innerText = input.validationMessage.toLowerCase();
+        // }
+        
+        if (!input.validity.valid) {
             submit.disabled = true;
             input.classList.add("link-invalid");
             inputError.innerText = input.validationMessage.toLowerCase();
@@ -82,61 +82,61 @@ export default (function() {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         
-        const apex = import.meta.env.PUBLIC_BACKEND_URL;
+        const apex = 'localhost:3002';
         const url = checkHTTP(input.value);
         const encodedURL = encodeURIComponent(url);
         let qr = null;
 
         useLoader();
 
-        if (bannedRegex.test(input.value)) {
-            input.setCustomValidity("Banned URL");
-        } else {
-            post(`${import.meta.env.PROD ? 'https://' : 'http://'}` + apex, { data: encodedURL })
-                .then((response) => {
-                    removeLoader();
+        // if (bannedRegex.test(input.value)) {
+        //     input.setCustomValidity("Banned URL");
+        // } else {
+        post('http://' + apex, { data: encodedURL })
+            .then((response) => {
+                removeLoader();
 
-                    if (response.error) {
-                        throw response;
+                if (response.error) {
+                    throw response;
+                }
+
+                if (qrwrapper instanceof HTMLDivElement) {
+                    if (qrwrapper.classList.contains('hide')) {
+                        qrwrapper.classList.remove('hide');
                     }
+                }
 
-                    if (qrwrapper instanceof HTMLDivElement) {
-                        if (qrwrapper.classList.contains('hide')) {
-                            qrwrapper.classList.remove('hide');
-                        }
-                    }
+                shortened.value = response.data.url;
+                
+                qr = new QRious({
+                    element: document.getElementById("qr"),
+                    value: shortened.value,
+                    size: 150
+                });
 
-                    shortened.value = response.data.url;
-                    
-                    qr = new QRious({
-                        element: document.getElementById("qr"),
-                        value: shortened.value,
-                        size: 150
-                    });
+                if (png instanceof HTMLAnchorElement) {
+                    png.href = qr.toDataURL("image/png");
+                    png.download = response.data.code;
+                }
+                
+                if (webp instanceof HTMLAnchorElement) {
+                    webp.href = qr.toDataURL("image/webp");
+                    webp.download = response.data.code;
+                }
 
-                    if (png instanceof HTMLAnchorElement) {
-                        png.href = qr.toDataURL("image/png");
-                        png.download = response.data.code;
-                    }
-                    
-                    if (webp instanceof HTMLAnchorElement) {
-                        webp.href = qr.toDataURL("image/webp");
-                        webp.download = response.data.code;
-                    }
+                if (jpg instanceof HTMLAnchorElement) {
+                    jpg.href = qr.toDataURL("image/jpeg");
+                    jpg.download = response.data.code;
+                }
 
-                    if (jpg instanceof HTMLAnchorElement) {
-                        jpg.href = qr.toDataURL("image/jpeg");
-                        jpg.download = response.data.code;
-                    }
-
-                    form.reset();
-                })
-                .catch((error) => {
-                    input.setCustomValidity(error.reason);
-                    input.classList.add("link-invalid");
-                    inputError.innerText = input.validationMessage.toLowerCase();
-                    removeLoader();
-                })
-        }
+                form.reset();
+            })
+            .catch((error) => {
+                input.setCustomValidity(error.reason);
+                input.classList.add("link-invalid");
+                inputError.innerText = input.validationMessage.toLowerCase();
+                removeLoader();
+            })
+        // }
     })
 })();

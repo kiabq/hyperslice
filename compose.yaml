@@ -14,8 +14,12 @@ services:
       - db
     networks:
       - hyperslice
-    env_file:
-      - common.env
+    environment:
+      - POSTGRES_HOST='localhost'
+      - POSTGRES_USER='hyperslice'
+      - POSTGRES_URL='postgresql://hyperslice:hyperslice@db/hyperslice'
+      - POSTGRES_PASSWORD='hyperslice'
+      - POSTGRES_DATABASE='hyperslice'
     container_name: hyperslice-api
   db:
     image: postgres:latest
@@ -26,8 +30,6 @@ services:
     volumes:
       - hyperslice-db:/var/lib/postgresql/data
       - ./api/schemas/init.sql:/docker-entrypoint-initdb.d/init.sql
-    env_file:
-      - common.env
     environment:
       - POSTGRES_USER=hyperslice
       - POSTGRES_PASSWORD=hyperslice
