@@ -6,7 +6,7 @@ services:
       - "4321:4321"
     container_name: hyperslice-frontend
     environment:
-      - PUBLIC_BACKEND_URL=${BACKEND_URL}
+      - PUBLIC_BACKEND_URL='http://hk4k0gs.5.161.192.70.sslip.io'
   api:
     build: ./api/.
     restart: unless-stopped
@@ -22,8 +22,8 @@ services:
       - POSTGRES_URL='postgresql://hyperslice:hyperslice@db/hyperslice'
       - POSTGRES_PASSWORD='hyperslice'
       - POSTGRES_DATABASE='hyperslice'
-      - BACKEND_URL=${BACKEND_URL}
-      - FRONTEND_URL=${FRONTEND_URL}
+      - BACKEND_URL='http://hk4k0gs.5.161.192.70.sslip.io'
+      - FRONTEND_URL='http://os4okcs.5.161.192.70.sslip.io'
     container_name: hyperslice-api
   db:
     image: postgres:latest
