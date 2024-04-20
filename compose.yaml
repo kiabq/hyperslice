@@ -5,6 +5,8 @@ services:
     ports:
       - "4321:4321"
     container_name: hyperslice-frontend
+    environment:
+      - PUBLIC_BACKEND_URL=${BACKEND_URL}
   api:
     build: ./api/.
     restart: unless-stopped
@@ -20,6 +22,8 @@ services:
       - POSTGRES_URL='postgresql://hyperslice:hyperslice@db/hyperslice'
       - POSTGRES_PASSWORD='hyperslice'
       - POSTGRES_DATABASE='hyperslice'
+      - BACKEND_URL=${BACKEND_URL}
+      - FRONTEND_URL=${FRONTEND_URL}
     container_name: hyperslice-api
   db:
     image: postgres:latest

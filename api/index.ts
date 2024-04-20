@@ -23,7 +23,7 @@ const pool = new Pool({
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
 });
-const backend_url = 'localhost:3000';
+const BACKEND_URL = process.env.BACKEND_URL;
 
 router.get('/:id', async (ctx) => {
   const code = (ctx.request.url.split('/'))[1];
@@ -61,7 +61,7 @@ router.post('/', async (ctx) => {
     ctx.response.body = { 
       message: 'POST Success', 
       data: { 
-        url: `http://${backend_url}/${code}`, 
+        url: `http://${BACKEND_URL}/${code}`, 
         code: code 
       }
     };

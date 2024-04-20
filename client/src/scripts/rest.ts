@@ -82,7 +82,7 @@ export default (function() {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         
-        const apex = 'localhost:3002';
+        const apex = import.meta.env.PUBLIC_BACKEND_URL;
         const url = checkHTTP(input.value);
         const encodedURL = encodeURIComponent(url);
         let qr = null;
