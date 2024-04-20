@@ -23,7 +23,7 @@ const pool = new Pool({
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
 });
-const BACKEND_URL = process.env.BACKEND_URL;
+// const BACKEND_URL = process.env.BACKEND_URL;
 
 router.get('/:id', async (ctx) => {
   const code = (ctx.request.url.split('/'))[1];
@@ -35,10 +35,10 @@ router.get('/:id', async (ctx) => {
     ctx.redirect(URL);
   } else if (!link) {
     ctx.status = 404;
-    ctx.redirect(`http://${process.env.FRONTEND_URL}/404`);
+    ctx.redirect(`http://localhost:4321/404`);
   } else {
     ctx.status = 500;
-    ctx.redirect(`http://${process.env.FRONTEND_URL}/500`);
+    ctx.redirect(`http://localhost:4321/500`);
   }
 });
 
@@ -61,7 +61,7 @@ router.post('/', async (ctx) => {
     ctx.response.body = { 
       message: 'POST Success', 
       data: { 
-        url: `http://${BACKEND_URL}/${code}`, 
+        url: `http://localhost:3000/${code}`, 
         code: code 
       }
     };
@@ -77,6 +77,6 @@ app
   .use(Logger())
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(3002)
+  .listen(3000)
 
 module.exports = app;
