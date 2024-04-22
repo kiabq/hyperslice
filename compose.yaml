@@ -1,12 +1,13 @@
 services:
   frontend:
-    build: ./client/.
+    build: 
+      context: ./client/.
+      args: 
+        PUBLIC_BACKEND_URL: ${BACKEND_URL}
     restart: unless-stopped
     ports:
       - "4321:4321"
     container_name: hyperslice-frontend
-    environment:
-      - PUBLIC_BACKEND_URL='http://hk4k0gs.5.161.192.70.sslip.io'
   api:
     build: ./api/.
     restart: unless-stopped
@@ -17,13 +18,11 @@ services:
     networks:
       - hyperslice
     environment:
-      - POSTGRES_HOST='localhost'
-      - POSTGRES_USER='hyperslice'
-      - POSTGRES_URL='postgresql://hyperslice:hyperslice@db/hyperslice'
-      - POSTGRES_PASSWORD='hyperslice'
-      - POSTGRES_DATABASE='hyperslice'
-      - BACKEND_URL='http://hk4k0gs.5.161.192.70.sslip.io'
-      - FRONTEND_URL='http://os4okcs.5.161.192.70.sslip.io'
+      POSTGRES_HOST: "localhost"
+      POSTGRES_USER: 'hyperslice'
+      POSTGRES_URL: 'postgresql://hyperslice:hyperslice@db/hyperslice'
+      POSTGRES_PASSWORD: 'hyperslice'
+      POSTGRES_DATABASE: 'hyperslice'
     container_name: hyperslice-api
   db:
     image: postgres:latest
