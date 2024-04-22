@@ -23,7 +23,15 @@ const pool = new Pool({
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
 });
-// const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL = process.env.BACKEND_URL;
+const FRONTEND_URL = process.env.FRONTEND_URL;
+const FORMATTED_BACKEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://$${BACKEND_URL}`;
+const FORMATTED_FRONTEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://$${FRONTEND_URL}`;
+
+router.get('/health', async (ctx) => {
+  ctx.status = 200;
+  ctx.body = { message: 'Healthy' };
+});
 
 router.get('/:id', async (ctx) => {
   const code = (ctx.request.url.split('/'))[1];
@@ -35,10 +43,10 @@ router.get('/:id', async (ctx) => {
     ctx.redirect(URL);
   } else if (!link) {
     ctx.status = 404;
-    ctx.redirect(`http://localhost:4321/404`);
+    ctx.redirect(`${FORMATTED_FRONTEND_URL}/404`);
   } else {
     ctx.status = 500;
-    ctx.redirect(`http://localhost:4321/500`);
+    ctx.redirect(`${FORMATTED_FRONTEND_URL}/500`);
   }
 });
 
@@ -61,7 +69,7 @@ router.post('/', async (ctx) => {
     ctx.response.body = { 
       message: 'POST Success', 
       data: { 
-        url: `http://localhost:3000/${code}`, 
+        url: `${FORMATTED_BACKEND_URL}/${code}`, 
         code: code 
       }
     };
