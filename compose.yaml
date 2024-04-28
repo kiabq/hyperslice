@@ -9,7 +9,16 @@ services:
       - "4321:4321"
     container_name: hyperslice-frontend
   api:
-    build: ./api/.
+    build:
+      context: ./api/.
+      args:
+        BACKEND_URL: '${BACKEND_URL}'
+        FRONTEND_URL: '${FRONTEND_URL}'
+        POSTGRES_HOST: "localhost"
+        POSTGRES_USER: 'hyperslice'
+        POSTGRES_URL: 'postgresql://hyperslice:hyperslice@db/hyperslice'
+        POSTGRES_PASSWORD: 'hyperslice'
+        POSTGRES_DATABASE: 'hyperslice'
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -17,14 +26,7 @@ services:
       - db
     networks:
       - hyperslice
-    args:
-      BACKEND_URL: '${BACKEND_URL}'
-      FRONTEND_URL: '${FRONTEND_URL}'
-      POSTGRES_HOST: "localhost"
-      POSTGRES_USER: 'hyperslice'
-      POSTGRES_URL: 'postgresql://hyperslice:hyperslice@db/hyperslice'
-      POSTGRES_PASSWORD: 'hyperslice'
-      POSTGRES_DATABASE: 'hyperslice'
+
     container_name: hyperslice-api
   db:
     image: postgres:latest
