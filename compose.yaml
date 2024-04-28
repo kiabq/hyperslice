@@ -3,7 +3,7 @@ services:
     build: 
       context: ./client/.
       args: 
-        PUBLIC_BACKEND_URL: ${BACKEND_URL}
+        PUBLIC_BACKEND_URL: '${BACKEND_URL}'
     restart: unless-stopped
     ports:
       - "4321:4321"
@@ -17,14 +17,16 @@ services:
       - db
     networks:
       - hyperslice
+    command: >
+      /bin/bash -c "echo URLS ARE: $BACKEND_URL $FRONTEND_URL"
     environment:
       POSTGRES_HOST: "localhost"
       POSTGRES_USER: 'hyperslice'
       POSTGRES_URL: 'postgresql://hyperslice:hyperslice@db/hyperslice'
       POSTGRES_PASSWORD: 'hyperslice'
       POSTGRES_DATABASE: 'hyperslice'
-      BACKEND_URL: ${BACKEND_URL}
-      FRONTEND_URL: ${FRONTEND_URL}
+      BACKEND_URL: '${BACKEND_URL}'
+      FRONTEND_URL: '${FRONTEND_URL}'
     container_name: hyperslice-api
   db:
     image: postgres:latest
