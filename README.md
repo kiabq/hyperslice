@@ -13,6 +13,5 @@ The main purpose of this was mainly just because it was fun. I also wanted to le
 
 ## Want to use it locally?
 1. Clone repo ```git clone git@github.com:kiabq/hyperslice.git```
-2. From the project's root directory `npm install` in both the client and the api directories
-3. Setup and create sql tables with the schemas provided in api/schemas
-4. In both directories, run `npm run dev` to run development previews
+2. Copy the `.env.example` to `.env`
+3. From the project's root directory `docker compose up -d` to get it up and running.
