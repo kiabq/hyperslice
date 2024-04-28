@@ -35,7 +35,7 @@ services:
       - "5432:5432"
     volumes:
       - hyperslice-db:/var/lib/postgresql/data
-      - ./api/schemas/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_USER=hyperslice
       - POSTGRES_PASSWORD=hyperslice
