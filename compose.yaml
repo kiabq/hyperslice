@@ -17,14 +17,14 @@ services:
       - db
     networks:
       - hyperslice
-    environment:
+    args:
+      BACKEND_URL: '${BACKEND_URL}'
+      FRONTEND_URL: '${FRONTEND_URL}'
       POSTGRES_HOST: "localhost"
       POSTGRES_USER: 'hyperslice'
       POSTGRES_URL: 'postgresql://hyperslice:hyperslice@db/hyperslice'
       POSTGRES_PASSWORD: 'hyperslice'
       POSTGRES_DATABASE: 'hyperslice'
-      BACKEND_URL: '${BACKEND_URL}'
-      FRONTEND_URL: '${FRONTEND_URL}'
     container_name: hyperslice-api
   db:
     image: postgres:latest
