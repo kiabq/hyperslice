@@ -7,6 +7,12 @@ COPY . .
 RUN npm install -g typescript ts-node
 RUN npm install
 
+# Define ARGS and ENV
+ARG BACKEND_URL
+ARG FRONTEND_URL
+ENV BACKEND_URL=$BACKEND_URL
+ENV FRONTEND_URL=$FRONTEND_URL
+
 # Print URLs
 RUN echo "BACKEND URL IS: ${BACKEND_URL}"
 RUN echo "FRONTEND URL IS: ${FRONTEND_URL}"
