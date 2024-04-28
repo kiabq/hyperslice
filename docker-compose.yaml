@@ -26,7 +26,6 @@ services:
       - db
     networks:
       - hyperslice
-
     container_name: hyperslice-api
   db:
     image: postgres:latest
@@ -47,7 +46,6 @@ services:
 volumes:
   hyperslice-db:
     driver: local
-
 networks:
   hyperslice:
     driver: bridge
