@@ -25,6 +25,10 @@ const pool = new Pool({
 });
 const BACKEND_URL = process.env.BACKEND_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL;
+
+console.log(BACKEND_URL);
+console.log(FRONTEND_URL);
+
 const FORMATTED_BACKEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://$${BACKEND_URL}`;
 const FORMATTED_FRONTEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://$${FRONTEND_URL}`;
 
