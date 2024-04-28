@@ -17,8 +17,6 @@ services:
       - db
     networks:
       - hyperslice
-    command: >
-      /bin/bash -c "echo URLS ARE: $BACKEND_URL $FRONTEND_URL"
     environment:
       POSTGRES_HOST: "localhost"
       POSTGRES_USER: 'hyperslice'

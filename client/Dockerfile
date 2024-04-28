@@ -10,6 +10,7 @@ ENV PUBLIC_BACKEND_URL=$PUBLIC_BACKEND_URL
 ENV HOST=0.0.0.0
 ENV PORT=4321
 
+# Print URLs
 RUN echo "BACKEND URL IS: ${PUBLIC_BACKEND_URL}"
 
 # Install dependencies and build the client
