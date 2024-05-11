@@ -1,5 +1,3 @@
-
-
 services:
   frontend:
     build: 
@@ -11,23 +9,16 @@ services:
       - "4321:4321"
     container_name: hyperslice-frontend
   api:
-    build:
-      context: ./api/.
-      args:
-        BACKEND_URL: '${BACKEND_URL}'
-        FRONTEND_URL: '${FRONTEND_URL}'
-        POSTGRES_HOST: "localhost"
-        POSTGRES_USER: 'hyperslice'
-        POSTGRES_URL: 'postgresql://hyperslice:hyperslice@db/hyperslice'
-        POSTGRES_PASSWORD: 'hyperslice'
-        POSTGRES_DATABASE: 'hyperslice'
-    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3001:3001"
+    build: ./api/.
+    restart: unless-stopped
     depends_on:
       - db
     networks:
       - hyperslice
+    env_file:
+      - .env
     container_name: hyperslice-api
   db:
     image: postgres:latest
@@ -38,12 +29,10 @@ services:
     volumes:
       - hyperslice-db:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    command: >
-      /bin/bash -c "chmod 755 /docker-entrypoint-initdb.d/init.sql"
     environment:
-      - POSTGRES_USER=hyperslice
-      - POSTGRES_PASSWORD=hyperslice
-      - POSTGRES_DB=hyperslice
+      - POSTGRES_USER='${POSTGRES_USER}'
+      - POSTGRES_PASSWORD='${POSTGRES_PASSWORD}'
+      - POSTGRES_DB='${POSTGRES_DATABASE}'
     container_name: hyperslice-db
     networks:
       - hyperslice

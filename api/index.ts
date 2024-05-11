@@ -8,8 +8,6 @@ import { encode, decode } from './utils/generate-alias';
 require('dotenv').config();
 
 const app = new Koa();
-app.use(Cors());
-app.use(BodyParser());
 
 const router = new Router();
 const pool = new Pool({
@@ -29,8 +27,8 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 console.log(BACKEND_URL);
 console.log(FRONTEND_URL);
 
-const FORMATTED_BACKEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://$${BACKEND_URL}`;
-const FORMATTED_FRONTEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://$${FRONTEND_URL}`;
+const FORMATTED_BACKEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://${BACKEND_URL}`;
+const FORMATTED_FRONTEND_URL = `${process.env.NODE_ENV === "production" ? 'https' : 'http'}://${FRONTEND_URL}`;
 
 router.get('/health', async (ctx) => {
   ctx.status = 200;
@@ -86,9 +84,11 @@ router.post('/', async (ctx) => {
 });
 
 app
+  .use(BodyParser())
+  .use(Cors())
   .use(Logger())
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(3000)
+  .listen(3001)
 
 module.exports = app;
