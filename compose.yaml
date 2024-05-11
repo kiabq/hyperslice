@@ -2,11 +2,11 @@ services:
   frontend:
     build: 
       context: ./client/.
-      args: 
-        PUBLIC_BACKEND_URL: '${BACKEND_URL}'
     restart: unless-stopped
     ports:
       - "4321:4321"
+    env_file:
+      - .env
     container_name: hyperslice-frontend
   api:
     ports:
@@ -29,6 +29,8 @@ services:
     volumes:
       - hyperslice-db:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - .env
     container_name: hyperslice-db
     networks:
       - hyperslice
