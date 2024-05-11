@@ -2,7 +2,10 @@ services:
   frontend:
     build: 
       context: ./client/.
+      args:
+        - PUBLIC_BACKEND_URL="${PUBLIC_BACKEND_URL}"
     restart: unless-stopped
+
     ports:
       - "4321:4321"
     env_file:
