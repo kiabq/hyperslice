@@ -28,10 +28,16 @@ services:
     restart: unless-stopped
     shm_size: 256mb
     ports:
-      - "5432:5432"
+      - "5432:5432/tcp"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - hyperslice-db:/var/lib/postgresql/data
+    user: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
     env_file:
       - .env
     container_name: hyperslice-db
