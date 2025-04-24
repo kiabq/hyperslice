@@ -1,2 +1,2 @@
 dev:
-	air --build.cmd "go build -o tmp/main cmd/main.go" --build.bin "./tmp/main"
+	air -c .air.toml --build.cmd "go build -o tmp/main cmd/main.go" --build.bin "./tmp/main"

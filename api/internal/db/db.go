@@ -54,16 +54,13 @@ func NewDatabaseClient() *DB {
 
 	psql, err := sql.Open("postgres", connString)
 	if err != nil {
-		panic(err)
+		log.Panicf("error connecting to postgres: ", err)
 	}
-
-	// close database
-	defer psql.Close()
 
 	// check db
 	err = psql.Ping()
 	if err != nil {
-		panic(err)
+		log.Panicf("error pinging postgres: ", err)
 	}
 
 	if err != nil {
@@ -94,10 +91,6 @@ func (d *DB) CreateCode() error {
 		fmt.Println("error occurred: ", err)
 		return nil
 	}
-
-	// do join to check if code + alias combo exists
-	rows, _ := d.connection.Query("select * from ")
-	fmt.Println("rows: ", rows)
 
 	return nil
 }
