@@ -77,22 +77,22 @@ func (d *DB) Close() error {
 	return d.connection.Close()
 }
 
-func (d *DB) CreateCode() error {
-	var code string = ""
-	chars := []string{"abcdefghijklmnopqrstuvwrxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"}
+func (d *DB) CreateCode() (string, error) {
+	code := ""
+	chars := "abcdefghijklmnopqrstuvwrxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 	for i := 0; i < 6; i++ {
 		char := int(math.Floor(rand.Float64() * float64(len(chars))))
-		code += chars[char]
+		code += string(chars[char])
 	}
 
 	err := d.CheckAlias(code)
 	if err != nil {
-		fmt.Println("error occurred: ", err)
-		return nil
+		fmt.Println("db/db.go CreateCode() error: ", err)
+		return "", err
 	}
 
-	return nil
+	return code, nil
 }
 
 func (d *DB) CheckAlias(alias string) error {

@@ -21,7 +21,7 @@ func main() {
 	}
 
 	// Ensure we close database connection when the server shuts down
-	// defer srv.Database.Close()
+	defer srv.Database.Close()
 
 	// Create HTTP server
 	httpServer := &http.Server{

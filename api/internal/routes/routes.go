@@ -17,13 +17,13 @@ func RegisterRoutes(server *server.Server) http.Handler {
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Cannot use any other method(s) to access this route
-		if r.Method != "GET" {
+		if r.Method != "POST" {
 			err := errors.New(INVALID_METHOD)
 			http.Error(w, err.Error(), 405)
 			return
 		}
 
-		server.Database.CheckAlias("")
+		server.Database.CreateCode()
 
 		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 	})
