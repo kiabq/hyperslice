@@ -1,15 +1,13 @@
 package routes
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"html"
 	"kiabq/hyperslice/internal/server"
+	pkg "kiabq/hyperslice/internal/server"
 	"net/http"
-)
-
-const (
-	INVALID_METHOD string = "Method Not Allowed"
 )
 
 func RegisterRoutes(server *server.Server) http.Handler {
@@ -18,19 +16,35 @@ func RegisterRoutes(server *server.Server) http.Handler {
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Cannot use any other method(s) to access this route
 		if r.Method != "POST" {
-			err := errors.New(INVALID_METHOD)
+			err := errors.New(pkg.INVALID_METHOD)
 			http.Error(w, err.Error(), 405)
 			return
 		}
 
-		server.Database.CreateCode()
+		code, err := server.Database.CreateCode()
+		if err != nil {
+			return
+		}
 
-		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+		// 1. Insert code into database with associated URL
+		// 2. Return shortened link
+		// 3. On client, use shortened link via /id route
+		// to fetch and redirect to associated link.
+
+		w.Header().Set("Content-Type", "application/json")
+
+		data := pkg.ResponseData{
+			Message: "Success",
+			Code:    200,
+			Body:    code,
+		}
+
+		json.NewEncoder(w).Encode(data)
 	})
 
 	mux.HandleFunc("/{id}", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" && r.Method != "GET" {
-			err := errors.New(INVALID_METHOD)
+			err := errors.New(pkg.INVALID_METHOD)
 			http.Error(w, err.Error(), 405)
 			return
 		}
